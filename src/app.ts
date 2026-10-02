@@ -3,6 +3,17 @@ import cors from 'cors';
 import helmet from 'helmet';
 import './config/env';
 
+const app: Application = express();
+
+// Trust Render's proxy (required for rate-limiting & X-Forwarded-For)
+app.set('trust proxy', 1);
+
+// Security and utility middleware
+app.use(helmet());
+app.use(cors({ origin: true, credentials: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
+
 import authRoutes from './routes/authRoutes';
 import accountRoutes from './routes/accountRoutes';
 import categoryRoutes from './routes/categoryRoutes';
