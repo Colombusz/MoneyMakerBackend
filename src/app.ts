@@ -24,6 +24,7 @@ import partnerRoutes from './routes/partnerRoutes';
 import uploadRoutes from './routes/uploadRoutes';
 import syncRoutes from './routes/syncRoutes';
 import dayNoteRoutes from './routes/dayNoteRoutes';
+import vacationRoutes from './routes/vacationRoutes';
 
 import { requestLogger } from './middleware/requestLogger';
 import { apiLimiter } from './middleware/rateLimiter';
@@ -48,6 +49,7 @@ app.use('/api/partners', partnerRoutes);
 app.use('/api/uploads', uploadRoutes);
 app.use('/api/day-notes', dayNoteRoutes);
 app.use('/api/sync', syncRoutes);
+app.use('/api/vacations', vacationRoutes);
 
 // 404 Handler
 app.use((_req: Request, res: Response) => {

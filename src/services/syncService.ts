@@ -84,12 +84,13 @@ export class SyncService {
           }
 
           if (entityType === 'accounts') {
-            const isCash = payload.type === 'cash' || (payload.name && payload.name.trim().toLowerCase() === 'cash');
+            const isCash = payload.type === 'cash' && (payload.name && payload.name.trim().toLowerCase() === 'cash');
             if (isCash) {
               const existingCash = await Account.findOne({
                 userId,
                 deletedAt: null,
-                $or: [{ name: /^cash$/i }, { type: 'cash' }]
+                name: /^cash$/i,
+                type: 'cash'
               });
               if (existingCash) {
                 // A Cash account already exists for this user; acknowledge client push without creating duplicate
